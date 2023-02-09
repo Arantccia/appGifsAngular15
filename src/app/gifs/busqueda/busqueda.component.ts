@@ -1,0 +1,17 @@
+import { Component, ViewChild, ElementRef } from '@angular/core';
+
+
+@Component({
+  selector: 'app-busqueda',
+  templateUrl: './busqueda.component.html',
+})
+export class BusquedaComponent {
+  @ViewChild('txtBuscar') txtBuscar!:ElementRef<HTMLInputElement>;
+  buscar(){
+   //console.log(this.txtBuscar);
+    //document.querySelector('input')!.value = '';
+    const valor = this.txtBuscar.nativeElement.value;
+    console.log(valor);
+    this.txtBuscar.nativeElement.value = ''
+  }
+}
