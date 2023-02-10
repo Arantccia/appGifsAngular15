@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { GifsService } from '../services/gifs.service';
 
 
 @Component({
@@ -7,11 +8,16 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 export class BusquedaComponent {
   @ViewChild('txtBuscar') txtBuscar!:ElementRef<HTMLInputElement>;
+  
+  constructor(private gifsService:GifsService){}
   buscar(){
    //console.log(this.txtBuscar);
     //document.querySelector('input')!.value = '';
+    
     const valor = this.txtBuscar.nativeElement.value;
-    console.log(valor);
+    if(valor.trim().length === 0)return
+    this.gifsService.buscarGifs(valor)
+ //console.log(valor);
     this.txtBuscar.nativeElement.value = ''
   }
 }
