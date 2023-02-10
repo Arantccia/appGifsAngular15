@@ -44,7 +44,7 @@ export class GifsService {
       localStorage.setItem('historial',JSON.stringify(this._historial))
     }
     
-    this.http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=jMfb3cF73iXmiwBkmNMM2ehxt3Bb01hZ&q=${query}&limit=10`)
+    this.http.get<SearchGifsResponse>(`${this.url}?api_key=${this.apiKey}&q=${query}&limit=10`)
       .subscribe((res)=>{
         this.result = res.data
         //console.log(this.result)
