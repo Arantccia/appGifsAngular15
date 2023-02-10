@@ -24,6 +24,7 @@ export class GifsService {
 // los servicios son singelstone  
   constructor(private http:HttpClient){
     this._historial = JSON.parse(localStorage.getItem('historial')!) || [];
+    this.result = JSON.parse(localStorage.getItem('gif')!) || [];
     /*
     loque estamos diciendo arriba es equivalente al if  y el || es el else que devuelve un array bacio si es nulo.
       if(localStorage.getItem('historial')){
@@ -36,7 +37,7 @@ export class GifsService {
   buscarGifs( query:string = ''){
     query = query.trim().toLocaleLowerCase()
     if(!this._historial.includes(query)){
-
+     // console.log(query)
       this._historial.unshift(query)
       this._historial = this._historial.splice(0, 10);
       // no guardar nunca información sensible
@@ -46,6 +47,8 @@ export class GifsService {
     this.http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=jMfb3cF73iXmiwBkmNMM2ehxt3Bb01hZ&q=${query}&limit=10`)
       .subscribe((res)=>{
         this.result = res.data
+        //console.log(this.result)
+        localStorage.setItem('gif',JSON.stringify(this.result))
         //console.log(res.data)
       })
       /*  
